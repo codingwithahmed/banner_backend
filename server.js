@@ -5,6 +5,7 @@ const Moralis = require('moralis').default
 const { EvmChain } = require("moralis/common-evm-utils");
 const solanaWeb3 = require('@solana/web3.js');
 const { default: mongoose } = require('mongoose');
+const bodyParser = require('body-parser');
 require('dotenv').config()
 
 
@@ -12,8 +13,9 @@ const app = express()
 
 
 app.use(cors())
-app.use(express.json())
-app.use(express.json({ extended: false, limit: "100mb" }))
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.text({ limit: '200mb' }));
 // app.use(
 //   express.urlencoded({ limit: "100mb", extended: true, parameterLimit: 50000 })
 // );
